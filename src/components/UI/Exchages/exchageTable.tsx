@@ -77,7 +77,7 @@ export default function ExchageTable() {
                     color="blue-gray"
                     className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
                   >
-                    {(index !== TABLE_HEAD.length - 1 && index !== 0) && (
+                    {(index !== TABLE_HEAD.length - 1 && index !== 0 && index !== 1) && (
                       <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
                     )}
                     {head === "" ? < input type="checkbox" /> : head}

@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import { useSelector, selectUser, useDispatch, toggleMenu } from "@/lib/redux"
 import Hamburger from 'hamburger-react'
 import {
     Navbar,
@@ -48,7 +49,9 @@ function ProfileMenu() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
  
     const closeMenu = () => setIsMenuOpen(false);
- 
+    const user = useSelector(selectUser);
+
+    console.log(user)
     return (
         <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
             <MenuHandler>
@@ -64,7 +67,7 @@ function ProfileMenu() {
                         className="border rounded-full w-10 border-gray-900 p-0.5"
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
                     />
-                        Jhon Tomson
+                        {user?.username}
                     <ChevronDownIcon
                         strokeWidth={2.5}
                         className={`h-3 w-3 transition-transform ${
@@ -109,7 +112,12 @@ function ProfileMenu() {
 export default function NavBar() {
  
     const [isNavOpen, setIsNavOpen] = React.useState(false);
-    const [isOpen, setOpen] = React.useState(false);
+    const isOpen = useSelector((state) => state.menu.openMenu);
+
+    const dispatch = useDispatch();
+    const handleMenu = () => {
+        dispatch(toggleMenu(isOpen));    
+    }
     React.useEffect(() => {
         window.addEventListener(
         "resize",
@@ -120,7 +128,7 @@ export default function NavBar() {
     return (
         <Navbar className="mx-auto mt-5 p-2 lg:rounded-full lg:pl-6 dark:bg-gray-800">
             <div className="relative mx-auto flex justify-between items-center text-blue-gray-900">
-                <Hamburger toggled={isOpen} toggle={setOpen} />
+                <Hamburger toggled={isOpen} toggle={handleMenu} />
                 <ProfileMenu />
             </div>
         </Navbar>

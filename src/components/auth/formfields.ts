@@ -4,7 +4,7 @@ const loginFields: InputField[] = [
     {
         labelText: "Email address",
         labelFor: "email-address",
-        id: "email-address",
+        id: "email",
         name: "email",
         type: "email",
         autoComplete: "email",
@@ -36,8 +36,8 @@ const signupFields: InputField[] = [
     },
     {
         labelText: "Email address",
-        labelFor: "email-address",
-        id: "email-address",
+        labelFor: "email_address",
+        id: "email",
         name: "email",
         type: "email",
         autoComplete: "email",
@@ -57,10 +57,10 @@ const signupFields: InputField[] = [
     {
         labelText: "Confirm Password",
         labelFor: "confirm-password",
-        id: "confirm-password",
+        id: "confirm_password",
         name: "confirm-password",
         type: "password",
-        autoComplete: "confirm-password",
+        autoComplete: "confirm_password",
         isRequired: true,
         placeholder: "Confirm Password"   
     }
