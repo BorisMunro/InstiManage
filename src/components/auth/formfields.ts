@@ -1,4 +1,4 @@
-import { InputField } from "../../stores/type"
+import { InputField } from "../../lib/type"
 
 const loginFields: InputField[] = [
     {
