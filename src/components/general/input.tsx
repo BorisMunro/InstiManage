@@ -24,20 +24,20 @@ export default function Input({
     customClass: string
 }){
     return(
-        <div className="my-5">
-            <label htmlFor={labelFor} className="sr-only">
-              {labelText}
-            </label>
-            <input
-              onChange={handleChange}
-              value={value}
-              id={id}
-              name={name}
-              type={type}
-              required={isRequired}
-              className={fixedInputClass+customClass}
-              placeholder={placeholder}
-            />
-          </div>
+      <div className="my-5">
+        <label htmlFor={labelFor} className="sr-only">
+          {labelText}
+        </label>
+        <input
+          onChange={handleChange}
+          value={value}
+          id={id}
+          name={name}
+          type={type}
+          required={isRequired}
+          className={fixedInputClass+customClass}
+          placeholder={placeholder}
+        />
+      </div>
     )
 }

@@ -21,7 +21,6 @@ const initialState: Iuser = user?
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
   },
   extraReducers: (builder) => {
@@ -53,7 +52,6 @@ export const authSlice = createSlice({
   },
 })
 
-/* Types */
 export interface Iuser {
   user: User | null ;
   status: 'idle' | 'loading' | 'failed';

@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import FormAction from './formAction'
 import FormExtra from './formExtra'
 
-import { login, useDispatch, useSelector, clearMessage, setMessage} from '@/lib/redux';
+import { login, useDispatch, clearMessage} from '@/lib/redux';
 
 const fields = loginFields;
 let fieldsState: any = {
@@ -23,7 +23,7 @@ export default function LoginComponent(){
 
     const [loginState,setLoginState]=useState(fieldsState);
     const [successful, setSuccessful] = useState(false)
-    const { message } = useSelector((state) => state.message);
+
     const dispatch = useDispatch();
 
     useEffect(() => {

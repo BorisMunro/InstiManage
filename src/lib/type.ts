@@ -1,4 +1,3 @@
-import { type } from "os";
 
 export type InputField = {
     labelText: string;

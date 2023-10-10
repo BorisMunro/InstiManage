@@ -7,7 +7,7 @@ export default function Sidebar() {
     const isOpen = useSelector((state) => state.menu.openMenu);
     console.log(isOpen)
     return (
-        <aside id="cta-button-sidebar" className="h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+        <aside id="cta-button-sidebar" className="hidden sm:block h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
             <div className="h-full px-3 py-4 overflow-y-auto rounded-tr-2xl rounded-br-2xl bg-gray-50 dark:bg-gray-800">
                 <ul className="space-y-2 font-medium">
                     <li>

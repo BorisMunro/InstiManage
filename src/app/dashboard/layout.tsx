@@ -7,10 +7,10 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-        <main className=" bg-slate-300">
-            <div className="flex">
+        <main className="">
+            <div className="gap-1 sm:gap-3 flex lg:gap-10">
                 <Sidebar />
-                <section className="w-full container mx-auto">
+                <section className="container w-4/5 mx-auto">
                     <NavBar />
                     <div className="">
                         {children}

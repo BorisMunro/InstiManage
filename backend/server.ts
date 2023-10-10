@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db';
 import { notFound, errorHandler } from './middlewares/ErrorMiddleware';
 import UserRoutes from './routes/UserRoutes';
+import ExchangeRoutes from './routes/ExchageRoutes'
 import cors from 'cors';
 
 
@@ -23,7 +24,7 @@ app.get("/api", (req: Request, res: Response) =>  {
 
 // User Route
 app.use("/api/auth", UserRoutes);
-
+app.use("/api/exchange", ExchangeRoutes);
 // Middleware
 app.use(notFound);
 app.use(errorHandler);

@@ -22,11 +22,12 @@ const categoryDatas = [
 export default function ExchageState() {
 
     return (
-        <div className="grid grid-cols-4 gap-8 mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 mt-5">
                 {categoryDatas.map(item => 
                     <ExchangeCategory
                         name={item.name}
                         className={item.class} 
+                        key={item.name}
                     />
                 )}
         </div>

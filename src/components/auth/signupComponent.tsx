@@ -28,13 +28,6 @@ export default function SignupComponent() {
       router.push('/auth/login')
     }
   }, [dispatch, successful]);
-  console.log(successful)
-  
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-  };
 
   const handleChange=(e : React.ChangeEvent<HTMLInputElement>)=>setSignupState({...signupState,[e.target.id]:e.target.value});
 
@@ -43,7 +36,6 @@ export default function SignupComponent() {
     createAccount()
   }
 
-  //handle Signup API Integration here
   const createAccount=()=>{
     const {username, email, password , confirm_password} = signupState;
     if (password !== confirm_password) {

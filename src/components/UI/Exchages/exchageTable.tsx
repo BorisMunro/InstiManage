@@ -1,71 +1,32 @@
 "use client"
+import {useEffect} from 'react'
+import { deleteExchange, getAllExchanges, useDispatch, useSelector } from "@/lib/redux";
 import {
     ChevronUpDownIcon,
   } from "@heroicons/react/24/outline";
-  import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
   import {
     Typography,
-    Chip,
-    Avatar,
-    IconButton,
-    Tooltip,
   } from "@material-tailwind/react";
    
    
-  const TABLE_HEAD = ["", "Exchange Member", "Exchanger", "Open Date", "close Date", "last modified date", "account ballance", "status", "actions"];
-   
-  const TABLE_ROWS = [
-    {
-      img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-      name: "John Michael",
-      email: "john@creative-tim.com",
-      job: "Manager",
-      org: "Organization",
-      online: true,
-      date: "23/04/18",
-    },
-    {
-      img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-      name: "Alexa Liras",
-      email: "alexa@creative-tim.com",
-      job: "Programator",
-      org: "Developer",
-      online: false,
-      date: "23/04/18",
-    },
-    {
-      img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-      name: "Laurent Perrier",
-      email: "laurent@creative-tim.com",
-      job: "Executive",
-      org: "Projects",
-      online: false,
-      date: "19/09/17",
-    },
-    {
-      img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-      name: "Michael Levi",
-      email: "michael@creative-tim.com",
-      job: "Programator",
-      org: "Developer",
-      online: true,
-      date: "24/12/08",
-    },
-    {
-      img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-      name: "Richard Gran",
-      email: "richard@creative-tim.com",
-      job: "Manager",
-      org: "Executive",
-      online: false,
-      date: "04/10/21",
-    },
-  ];
-export default function ExchageTable() {
+ const TABLE_HEAD = ["", "Exchange Member", "Exchanger", "Open Date", "close Date", "last modified date", "account ballance", "status", "actions"];
+  
+export default function ExchageTable({filter}) {
+    
+    const exchanges = useSelector((state) => state.exchange.exchanges);
+    
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getAllExchanges())  
+    }, [])
 
+    const handleDelete =  (_id: string) => {
+       dispatch(deleteExchange({_id}));
+    }
     return (
-        <table className="mt-4 rounded-xl bg-white w-full min-w-max table-auto text-left">
-          <thead>
+      <div className="container overflow-x-scroll h-['200px']">
+        <table className="mt-4 rounded-xl bg-white overflow-x-hidden w-40 lg:container text-left">
+          <thead className='overflow-x-hidden'>
             <tr>
               {TABLE_HEAD.map((head, index) => (
                 <th
@@ -86,83 +47,41 @@ export default function ExchageTable() {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {TABLE_ROWS.map(
-              ({ img, name, email, job, org, online, date }, index) => {
-                const isLast = index === TABLE_ROWS.length - 1;
-                const classes = isLast
-                  ? "p-4"
-                  : "p-4 border-b border-blue-gray-50";
- 
+          <tbody className=' overflow-x-scroll'>
+            {exchanges.filter(item=> item.exchanger.search(filter) !== -1).map(
+              ({_id, exchanger, exchangerMember, openDate, updatedAt, closeDate, lastModifiedDate, status, accountBallance }, index) => {
                 return (
-                  <tr key={name}>
+                  <tr key={exchangerMember}>
                     <td className="text-center">
                         <input type="checkbox" />
                     </td>
-                    <td className={classes}>
-                      <div className="flex items-center gap-3">
-                        <Avatar src={img} alt={name} size="sm" className="w-10" />
-                        <div className="flex flex-col">
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                          >
-                            {name}
-                          </Typography>
-                          <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal opacity-70"
-                          >
-                            {email}
-                          </Typography>
-                        </div>
-                      </div>
+                    <td className="">
+                        {exchanger}
                     </td>
-                    <td className={classes}>
-                      <div className="flex flex-col">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal"
-                        >
-                          {job}
-                        </Typography>
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal opacity-70"
-                        >
-                          {org}
-                        </Typography>
-                      </div>
+                    <td>
+                      {exchangerMember}
                     </td>
-                    <td className={classes}>
-                      <div className="w-max">
-                        <Chip
-                          variant="ghost"
-                          size="sm"
-                          value={online ? "online" : "offline"}
-                          color={online ? "green" : "blue-gray"}
-                        />
-                      </div>
+                    <td className={""}>
+                       {openDate}
                     </td>
-                    <td className={classes}>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {date}
-                      </Typography>
+                    <td>
+                      {closeDate}
                     </td>
-                    <td className={classes}>
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
+                    <td>
+                      {updatedAt}
+                    </td>
+                    <td>
+                      {accountBallance}
+                    </td>
+                    <td>
+                      {status}
+                    </td>
+                    <td className='block'>
+                        <button 
+                          className='block p-2'
+                          onClick={() => handleDelete(_id)}
+                          >Delete</button>
+                        <button className='blcok p-2'>Update</button>                          
                     </td>
                   </tr>
                 );
@@ -170,5 +89,6 @@ export default function ExchageTable() {
             )}
           </tbody>
         </table>
+      </div>
     )
 }
